@@ -1,0 +1,27 @@
+start project
+    docker-compose up
+    docker-compose up --build
+stop project
+    docker-compose stop
+
+web
+    http://localhost:8011
+
+mysql:
+    login root
+    pass cigeh_bdgcg-dbdhc
+
+docker login:
+    docker exec -it vaub_php /bin/bash
+    docker exec -it vaub_php php artisan migrate
+    docker exec -it vaub_php php artisan db:seed
+    docker exec -it vaub_php php artisan key:generate
+
+Run test
+    docker exec -it vaub_php phpunit
+    docker exec -it vaub_php phpunit --coverage-html ./coverage
+
+Run test. Run commands from docker:
+    ../vendor-vauboo/bin/phpunit
+    ../vendor-vauboo/bin/phpcs --standard=phpcs.xml src/Vauboo tests/AppBundle/Controller/
+

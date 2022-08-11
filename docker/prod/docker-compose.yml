@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  kflw_php:
+    image: ${ServerStor}${pathRepositor}
+    container_name: kflw_php
+    environment:
+      WEB_DOCUMENT_ROOT: /var/www/html/public
+      WEB_DOCUMENT_INDEX: index.php
+      PHP_MEMORY_LIMIT: 4048M
+      PHP_UPLOAD_MAX_FILESIZE: 512M
+      PHP_POST_MAX_SIZE: 512M
+      PHP_DATE_TIMEZONE: Europe/Kiev
+      PHP_DISPLAY_ERRORS: 1
+      php.xdebug.max_nesting_level: 500
+      php.xdebug.var_display_max_data: 10024
+    networks:
+      kflw_net:
+        ipv4_address: 172.50.1.5
+
+  kflw_redis:
+    image: "redis:alpine"
+    container_name: kflw_redis
+    networks:
+      kflw_net:
+        ipv4_address: 172.50.1.10
+
+networks:
+  kflw_net:
+    ipam:
+      config:
+        - subnet: 172.50.1.0/24
